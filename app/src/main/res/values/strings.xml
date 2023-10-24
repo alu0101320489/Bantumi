@@ -47,4 +47,8 @@
     <string name="txtDialogoFinalTitulo">Fin del juego</string>
     <string name="txtDialogoFinalPregunta">¿Desea jugar otra partida?</string>
 
+    <!-- Restart Dialog -->
+    <string name="txtDialogoReinicioTitulo">Reiniciar partida</string>
+    <string name="txtDialogoReinicioPregunta">¿Desea reiniciar la partida?</string>
+
 </resources>

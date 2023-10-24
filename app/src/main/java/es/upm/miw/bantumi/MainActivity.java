@@ -127,7 +127,11 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 return true;
 
-            // @TODO!!! resto opciones
+            case R.id.opcReiniciarPartida:
+                new RestartDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+                return true;
+
+  // @TODO!!! resto opciones
 
             default:
                 Snackbar.make(

@@ -4,7 +4,7 @@ import android.util.Log;
 
 import es.upm.miw.bantumi.model.BantumiViewModel;
 
-public class JuegoBantumi {
+public class  JuegoBantumi {
 
     public static final int NUM_POSICIONES = 14;
     // Posiciones 0-5: campo jugador 1
