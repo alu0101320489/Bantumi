@@ -1,7 +1,9 @@
 package es.upm.miw.bantumi;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.FileOutputStream;
 import java.util.Locale;
 
 import es.upm.miw.bantumi.model.BantumiViewModel;
@@ -130,6 +133,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.opcReiniciarPartida:
                 new RestartDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
                 return true;
+            case R.id.opcGuardarPartida:
+                new SaveDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+                return true;
+
 
   // @TODO!!! resto opciones
 
@@ -143,6 +150,19 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void saveToFile() {
+        FileOutputStream fos;
+        try {
+            fos = openFileOutput("partida_guardada", Context.MODE_PRIVATE);
+            for(int i = 0; i < 14; i++ ) {
+                fos.write((juegoBantumi.getSemillas(i) + "-").toString().getBytes());
+            }
+            fos.close();
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "FILE I/O ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     /**
      * Acción que se ejecuta al pulsar sobre cualquier hueco
      *

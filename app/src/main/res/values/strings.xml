@@ -51,4 +51,8 @@
     <string name="txtDialogoReinicioTitulo">Reiniciar partida</string>
     <string name="txtDialogoReinicioPregunta">¿Desea reiniciar la partida?</string>
 
+    <!-- Save Dialog -->
+    <string name="txtDialogoGuardarTitulo">Guardar partida</string>
+    <string name="txtDialogoGuardarPregunta">¿Desea guardar la partida?</string>
+
 </resources>

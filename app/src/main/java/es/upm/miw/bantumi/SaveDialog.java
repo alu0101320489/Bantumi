@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.DialogFragment;
 
-public class RestartDialog extends DialogFragment {
+public class SaveDialog extends DialogFragment {
 
     @NonNull
     @Override
@@ -18,26 +18,26 @@ public class RestartDialog extends DialogFragment {
         assert main != null;
         AlertDialog.Builder builder = new AlertDialog.Builder(main);
         builder
-                .setTitle(R.string.txtDialogoReinicioTitulo)
-                .setMessage(R.string.txtDialogoReinicioPregunta)
+                .setTitle(R.string.txtDialogoGuardarTitulo)
+                .setMessage(R.string.txtDialogoGuardarPregunta)
                 .setPositiveButton(
                         getString(android.R.string.yes),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1);
+                                main.saveToFile();
                             }
                         }
                 )
                 .setNegativeButton(
-                getString(android.R.string.cancel),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }
-        );
+                        getString(android.R.string.cancel),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }
+                );
 
         return builder.create();
     }
