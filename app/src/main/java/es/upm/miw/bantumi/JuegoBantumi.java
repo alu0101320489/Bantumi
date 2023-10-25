@@ -192,8 +192,11 @@ public class  JuegoBantumi {
      * @return juego serializado
      */
     public String serializa() {
-        // @TODO
-        return null;
+        String juegoSerializado = "";
+        for(int i = 0; i < 14; i++ ) {
+            juegoSerializado += getSemillas(i) + ",";
+        }
+        return juegoSerializado;
     }
 
     /**
@@ -202,6 +205,9 @@ public class  JuegoBantumi {
      * @param juegoSerializado cadena que representa el estado completo del juego
      */
     public void deserializa(String juegoSerializado) {
-        // @TODO
+        String[] semillas = juegoSerializado.split(",");
+        for(int i = 0; i < 14; i++ ) {
+            setSemillas(i, Integer.parseInt(semillas[i]));
+        }
     }
 }

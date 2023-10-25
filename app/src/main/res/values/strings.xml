@@ -55,4 +55,8 @@
     <string name="txtDialogoGuardarTitulo">Guardar partida</string>
     <string name="txtDialogoGuardarPregunta">¿Desea guardar la partida?</string>
 
+    <!-- Load Dialog -->
+    <string name="txtDialogoCargarTitulo">Recuperar partida</string>
+    <string name="txtDialogoCargarPregunta">¿Desea recuperar la partida guardada?</string>
+
 </resources>

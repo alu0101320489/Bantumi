@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Locale;
 
@@ -136,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.opcGuardarPartida:
                 new SaveDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
                 return true;
+            case R.id.opcRecuperarPartida:
+                new LoadDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+                return true;
 
 
   // @TODO!!! resto opciones
@@ -154,10 +158,23 @@ public class MainActivity extends AppCompatActivity {
         FileOutputStream fos;
         try {
             fos = openFileOutput("partida_guardada", Context.MODE_PRIVATE);
-            for(int i = 0; i < 14; i++ ) {
-                fos.write((juegoBantumi.getSemillas(i) + "-").toString().getBytes());
-            }
+            fos.write(juegoBantumi.serializa().getBytes());
             fos.close();
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "FILE I/O ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadFromFile() {
+        FileInputStream fis;
+        try {
+            fis = openFileInput("partida_guardada");
+            byte[] buffer = new byte[1024];
+            int n = fis.read(buffer);
+            String juegoSerializado = new String(buffer, 0, n);
+            juegoBantumi.deserializa(juegoSerializado);
+            fis.close();
         } catch (Exception e) {
             Log.e(LOG_TAG, "FILE I/O ERROR: " + e.getMessage());
             e.printStackTrace();
