@@ -2,6 +2,8 @@ package es.upm.miw.bantumi;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -14,10 +16,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Locale;
 
@@ -25,7 +29,7 @@ import es.upm.miw.bantumi.model.BantumiViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected final String LOG_TAG = "MiW";
+    protected static final String LOG_TAG = "MiW";
     JuegoBantumi juegoBantumi;
     BantumiViewModel bantumiVM;
     int numInicialSemillas;
@@ -41,6 +45,18 @@ public class MainActivity extends AppCompatActivity {
         juegoBantumi = new JuegoBantumi(bantumiVM, JuegoBantumi.Turno.turnoJ1, numInicialSemillas);
         crearObservadores();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String player1Name = sharedPref.getString("playerName", "Jugador 1");
+
+        TextView tvJugador1 = findViewById(R.id.tvPlayer1);
+        tvJugador1.setText(player1Name);
+    }
+
 
     /**
      * Crea y subscribe los observadores asignados a las posiciones del tablero.
@@ -120,9 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.opcAjustes: // @todo Preferencias
-//                startActivity(new Intent(this, BantumiPrefs.class));
-//                return true;
+            case R.id.opcAjustes:
+                startActivity(new Intent(this, BantumiPrefs.class));
+                return true;
             case R.id.opcAcercaDe:
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.aboutTitle)
@@ -175,6 +191,12 @@ public class MainActivity extends AppCompatActivity {
             String juegoSerializado = new String(buffer, 0, n);
             juegoBantumi.deserializa(juegoSerializado);
             fis.close();
+        }catch (FileNotFoundException e) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.txtDialogoNoExistePartidaTitulo)
+                    .setMessage(R.string.txtDialogoNoExistePartidaTexto)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .show();
         } catch (Exception e) {
             Log.e(LOG_TAG, "FILE I/O ERROR: " + e.getMessage());
             e.printStackTrace();

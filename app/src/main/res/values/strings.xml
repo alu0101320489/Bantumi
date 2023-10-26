@@ -58,5 +58,7 @@
     <!-- Load Dialog -->
     <string name="txtDialogoCargarTitulo">Recuperar partida</string>
     <string name="txtDialogoCargarPregunta">¿Desea recuperar la partida guardada?</string>
+    <string name="txtDialogoNoExistePartidaTitulo">Error al recuperar partida</string>
+    <string name="txtDialogoNoExistePartidaTexto">No existe una partida guardada</string>
 
 </resources>
