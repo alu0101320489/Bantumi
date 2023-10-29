@@ -4,9 +4,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import java.util.List;
 
-import es.upm.miw.bantumi.BestScore;
-import kotlin.Pair;
-
 public class ScoreRepository {
     private ScoreDAO mScoreDao;
     private LiveData<List<ScoreModel>> mAllScores;

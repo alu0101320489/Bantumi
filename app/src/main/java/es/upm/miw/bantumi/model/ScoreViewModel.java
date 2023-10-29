@@ -7,8 +7,6 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import es.upm.miw.bantumi.BestScore;
-
 public class ScoreViewModel extends AndroidViewModel {
 
     private ScoreRepository scoreRepository;
@@ -27,5 +25,9 @@ public class ScoreViewModel extends AndroidViewModel {
 
     public void insert(ScoreModel scoreModel) {
         scoreRepository.insert(scoreModel);
+    }
+
+    public LiveData<List<BestScore>> getTop10Scores() {
+        return scoreRepository.getTop10Scores();
     }
 }

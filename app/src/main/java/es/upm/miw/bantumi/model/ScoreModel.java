@@ -10,11 +10,11 @@ public class ScoreModel {
     private int id;
 
     private String playerName;
-    private Date dateTime;
+    private String dateTime;
     private int store1;
     private int store2;
 
-    public ScoreModel(String playerName, Date dateTime, int store1, int store2) {
+    public ScoreModel(String playerName, String dateTime, int store1, int store2) {
         this.playerName = playerName;
         this.dateTime = dateTime;
         this.store1 = store1;
@@ -29,7 +29,7 @@ public class ScoreModel {
         return playerName;
     }
 
-    public Date getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
@@ -49,7 +49,7 @@ public class ScoreModel {
         this.playerName = playerName;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 

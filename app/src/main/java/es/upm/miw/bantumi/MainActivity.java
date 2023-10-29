@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteCursor;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -23,9 +24,15 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import es.upm.miw.bantumi.model.BantumiViewModel;
+import es.upm.miw.bantumi.model.ScoreDAO;
+import es.upm.miw.bantumi.model.ScoreModel;
+import es.upm.miw.bantumi.model.ScoreRoomDatabase;
+import es.upm.miw.bantumi.model.ScoreViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     JuegoBantumi juegoBantumi;
     BantumiViewModel bantumiVM;
     int numInicialSemillas;
+
+    private ScoreViewModel scoreViewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.opcRecuperarPartida:
                 new LoadDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+            case R.id.opcMejoresResultados:
+                startActivity(new Intent(this, TopScoresActivity.class));
                 return true;
 
 
@@ -259,7 +271,19 @@ public class MainActivity extends AppCompatActivity {
         )
         .show();
 
-        // @TODO guardar puntuación
+        scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String player1Name = sharedPref.getString("playerName", "Jugador 1");
+        String playerName = juegoBantumi.getSemillas(6) >= juegoBantumi.getSemillas(13) ? player1Name: "Jugador 2";
+        ScoreModel score = new ScoreModel(playerName, sdf.format(new Date()), juegoBantumi.getSemillas(6), juegoBantumi.getSemillas(13));
+        try {
+            scoreViewModel.insert(score);
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+
 
         // terminar
         new FinalAlertDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");

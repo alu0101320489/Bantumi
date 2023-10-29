@@ -1,4 +1,4 @@
-package es.upm.miw.bantumi;
+package es.upm.miw.bantumi.model;
 
 public class BestScore {
 
@@ -24,5 +24,20 @@ public class BestScore {
 
     public void setStore(int store) {
         this.store1 = store;
+    }
+
+    public String toString() {
+        return playerName + " - " + store1;
+    }
+
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof BestScore)) {
+            return false;
+        }
+        BestScore other = (BestScore) o;
+        return this.playerName.equals(other.playerName) && this.store1 == other.store1;
     }
 }
