@@ -9,4 +9,10 @@
         app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/prefTituloCategoria2">
+    <SwitchPreferenceCompat
+        app:key="IAstart"
+        app:title="@string/prefTituloComenzarOponente" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

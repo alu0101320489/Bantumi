@@ -1,12 +1,14 @@
 package es.upm.miw.bantumi;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
 
 public class FinalAlertDialog extends DialogFragment {
 
@@ -25,7 +27,13 @@ public class FinalAlertDialog extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1);
+                                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(main);
+                                Boolean IAstart = sharedPref.getBoolean("IAstart", false);
+                                if (IAstart) {
+                                    main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ2);
+                                }else {
+                                    main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1);
+                                }
                             }
                         }
                 )

@@ -37,6 +37,19 @@ public class BantumiPrefs extends AppCompatActivity {
                         }
                     }
             );
+
+            findPreference("IAstart").setOnPreferenceChangeListener(
+                    new Preference.OnPreferenceChangeListener() {
+                        @Override
+                        public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                            Log.i(
+                                    MainActivity.LOG_TAG,
+                                    "onCreatePreferences(): " + preference + " = " + newValue
+                            );
+                            return true;
+                        }
+                    }
+            );
         }
     }
 }

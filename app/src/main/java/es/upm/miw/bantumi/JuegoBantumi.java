@@ -1,6 +1,9 @@
 package es.upm.miw.bantumi;
 
+import android.content.SharedPreferences;
 import android.util.Log;
+
+import androidx.preference.PreferenceManager;
 
 import es.upm.miw.bantumi.model.BantumiViewModel;
 

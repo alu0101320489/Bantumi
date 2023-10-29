@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     BantumiViewModel bantumiVM;
     int numInicialSemillas;
 
+
     private ScoreViewModel scoreViewModel;
 
 
@@ -61,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        Boolean IAstart = sharedPref.getBoolean("IAstart", false);
+        if (IAstart) {
+            juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ2);
+        } else {
+            juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1);
+        }
         String player1Name = sharedPref.getString("playerName", "Jugador 1");
 
         TextView tvJugador1 = findViewById(R.id.tvPlayer1);
