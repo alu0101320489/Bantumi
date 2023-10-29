@@ -30,4 +30,8 @@ public class ScoreViewModel extends AndroidViewModel {
     public LiveData<List<BestScore>> getTop10Scores() {
         return scoreRepository.getTop10Scores();
     }
+
+    public void deleteAll() {
+        scoreRepository.deleteAll();
+    }
 }

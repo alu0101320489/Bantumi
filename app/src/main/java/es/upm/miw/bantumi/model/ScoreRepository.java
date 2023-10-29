@@ -27,5 +27,11 @@ public class ScoreRepository {
     LiveData<List<BestScore>> getTop10Scores() {
         return mScoreDao.getTop10Scores();
     }
+
+    public void deleteAll() {
+        ScoreRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mScoreDao.deleteAll();
+        });
+    }
 }
 

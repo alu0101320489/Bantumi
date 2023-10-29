@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.opcRecuperarPartida:
                 new LoadDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+                return true;
             case R.id.opcMejoresResultados:
                 startActivity(new Intent(this, TopScoresActivity.class));
                 return true;
@@ -280,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
 
         scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         String player1Name = sharedPref.getString("playerName", "Jugador 1");
         String playerName = juegoBantumi.getSemillas(6) >= juegoBantumi.getSemillas(13) ? player1Name: "Jugador 2";
         ScoreModel score = new ScoreModel(playerName, sdf.format(new Date()), juegoBantumi.getSemillas(6), juegoBantumi.getSemillas(13));
@@ -294,5 +295,13 @@ public class MainActivity extends AppCompatActivity {
 
         // terminar
         new FinalAlertDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+    }
+
+    public void deleteAllScores() {
+        scoreViewModel.deleteAll();
+    }
+
+    public void deleteScoresDialog() {
+        new RestartDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
     }
 }
