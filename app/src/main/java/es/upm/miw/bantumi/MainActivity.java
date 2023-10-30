@@ -266,8 +266,10 @@ public class MainActivity extends AppCompatActivity {
      * El juego ha terminado. Volver a jugar?
      */
     private void finJuego() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String player1Name = sharedPref.getString("playerName", "Jugador 1");
         String texto = (juegoBantumi.getSemillas(6) > 6 * numInicialSemillas)
-                ? "Gana Jugador 1"
+                ? "Gana " + player1Name
                 : "Gana Jugador 2";
         if (juegoBantumi.getSemillas(6) == 6 * numInicialSemillas) {
             texto = "¡¡¡ EMPATE !!!";
@@ -280,11 +282,12 @@ public class MainActivity extends AppCompatActivity {
         .show();
 
         scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-        String player1Name = sharedPref.getString("playerName", "Jugador 1");
-        String playerName = juegoBantumi.getSemillas(6) >= juegoBantumi.getSemillas(13) ? player1Name: "Jugador 2";
-        ScoreModel score = new ScoreModel(playerName, sdf.format(new Date()), juegoBantumi.getSemillas(6), juegoBantumi.getSemillas(13));
+
+        ScoreModel score = juegoBantumi.getSemillas(6) >= juegoBantumi.getSemillas(13) ?
+                new ScoreModel(player1Name, sdf.format(new Date()), juegoBantumi.getSemillas(6), juegoBantumi.getSemillas(13)) :
+                new ScoreModel("Jugador 2", sdf.format(new Date()), juegoBantumi.getSemillas(13), juegoBantumi.getSemillas(6));
+
         try {
             scoreViewModel.insert(score);
         } catch (Exception e) {
