@@ -21,6 +21,6 @@ public interface ScoreDAO {
     @Query("SELECT playerName, store1 FROM score ORDER BY store1 DESC LIMIT 10")
     LiveData<List<BestScore>> getTop10Scores();
 
-    @Delete
-    void deleteAll(ScoreModel... scoreModels);
+    @Query("DELETE FROM score")
+    void deleteAllScores();
 }

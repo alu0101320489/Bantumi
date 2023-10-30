@@ -30,7 +30,7 @@ public class ScoreRepository {
 
     public void deleteAll() {
         ScoreRoomDatabase.databaseWriteExecutor.execute(() -> {
-            mScoreDao.deleteAll();
+            mScoreDao.deleteAllScores();
         });
     }
 }

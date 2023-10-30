@@ -30,7 +30,6 @@
         android:layout_marginTop="548dp"
         android:layout_marginRight="16dp"
         android:text="Borrar puntuaciones"
-        android:onClick="deleteScoresDialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

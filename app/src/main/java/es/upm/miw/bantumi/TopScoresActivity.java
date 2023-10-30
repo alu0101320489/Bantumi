@@ -2,6 +2,7 @@ package es.upm.miw.bantumi;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,9 +26,26 @@ public class TopScoresActivity extends AppCompatActivity {
 
         ScoreViewModel scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
         scoreViewModel.getTop10Scores().observe(this, adapter::submitList);
+
+        Button button = findViewById(R.id.borrar);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteScoresDialog();
+            }
+        });
     }
 
     public void goBack(View view) {
         finish();
+    }
+
+
+    public void deleteScoresDialog() {
+        new DeleteScoresDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+    }
+    public void deleteAllScores() {
+        ScoreViewModel scoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
+        scoreViewModel.deleteAll();
     }
 }

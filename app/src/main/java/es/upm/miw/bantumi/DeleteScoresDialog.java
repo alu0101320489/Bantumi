@@ -12,19 +12,19 @@ public class DeleteScoresDialog extends DialogFragment{
         @NonNull
         @Override
         public AppCompatDialog onCreateDialog(Bundle savedInstanceState) {
-            final MainActivity main = (MainActivity) requireActivity();
+            final TopScoresActivity topScoresActivity = (TopScoresActivity) requireActivity();
 
-            assert main != null;
-            AlertDialog.Builder builder = new AlertDialog.Builder(main);
+            assert topScoresActivity != null;
+            AlertDialog.Builder builder = new AlertDialog.Builder(topScoresActivity);
             builder
-                    .setTitle("Borrar puntiaciones")
+                    .setTitle("Borrar puntuaciones")
                     .setMessage("Desea borrar las puntuaciones?")
                     .setPositiveButton(
                             getString(android.R.string.yes),
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    main.deleteAllScores();
+                                    topScoresActivity.deleteAllScores();
                                 }
                             }
                     )
