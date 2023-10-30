@@ -296,12 +296,4 @@ public class MainActivity extends AppCompatActivity {
         // terminar
         new FinalAlertDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
     }
-
-    public void deleteAllScores() {
-        scoreViewModel.deleteAll();
-    }
-
-    public void deleteScoresDialog() {
-        new RestartDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
-    }
 }
